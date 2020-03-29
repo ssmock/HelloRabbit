@@ -16,7 +16,7 @@ module Receiver =
         Connection: IConnection
         Channel: IModel
         Consumer: EventingBasicConsumer
-    }      
+    }
 
     let start (config: ConnectionConfig) consumerTag =
         let f = ConnectionFactory()
@@ -39,7 +39,11 @@ module Receiver =
         let consumer = EventingBasicConsumer channel
 
         let handleIt (args: BasicDeliverEventArgs) =
-            printfn "%s received message: %A" consumerTag args
+            if args.Redelivered then
+                printfn "%s received message: %A" consumerTag args
+            else
+                printfn "%s received message: %A" consumerTag args
+            
             channel.BasicAck (args.DeliveryTag, false)
 
         consumer.Received.Add handleIt

@@ -4,10 +4,10 @@ open System
 open HelloRabbit.Inbound
 open System.Threading
 
-let rec waitForQueue startResult =
+let rec wait () =
     Thread.Sleep 2000
     printfn "."
-    waitForQueue startResult
+    wait ()
 
 [<EntryPoint>]
 let main argv =
@@ -18,8 +18,10 @@ let main argv =
                           HostName = "172.17.0.3"
                           QueueName = "test" }
 
-    let startReceiver1 = Receiver.start receiveConfig "receiver1"
+    let _startReceiver1 = Receiver.start receiveConfig "receiver1"
+    let _startReceiver2 = Receiver.start receiveConfig "receiver2"
+    let _startReceiver3 = Receiver.start receiveConfig "receiver3"
     
-    waitForQueue startReceiver1
+    wait ()
 
     0 // return an integer exit code

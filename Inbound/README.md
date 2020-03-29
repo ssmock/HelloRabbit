@@ -45,3 +45,21 @@ not enough! You need to "start" it by calling:
 ```
 channel.BasicConsume(config.QueueName, autoAck, consumerTag, consumer)
 ```
+
+
+
+## Multiple receivers
+
+Here are some personal observations.
+
+If you define multiple consumers for a queue (at least one defined with simple
+defaults), receivers seem to take turns dequeuing. Note that this happens even
+with unacknowledged messages -- if a consumer gets a message, but doesn't 
+acknowledge it, other consumers still can't see it. The exception here seems to
+be on startup -- the first register consumer appears to get priority. I'm not
+sure whether this is a rule, or contingent upon, e.g. how quickly it gets 
+through its messages.
+
+Note that my "multiple receiver" implementation uses multiple connection 
+factories, etc. This probably isn't the best implementation, but it doesn't
+seem to do any harm.
