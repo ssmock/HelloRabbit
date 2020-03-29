@@ -11,16 +11,16 @@ let rec wait () =
 
 [<EntryPoint>]
 let main argv =
-    let receiveConfig: Receiver.ConnectionConfig = 
+    let receiveConfig: ConnectionConfig = 
                         { UserName = "guest"
                           Password = "guest"
                           VirtualHost = "/"
                           HostName = "172.17.0.3"
                           QueueName = "test" }
 
-    let _startReceiver1 = Receiver.start receiveConfig "receiver1"
-    let _startReceiver2 = Receiver.start receiveConfig "receiver2"
-    let _startReceiver3 = Receiver.start receiveConfig "receiver3"
+    let _startReceiver1 = Receiver.start receiveConfig { Tag = "just-ack"; AckBehavior = Ack }
+    let _startReceiver2 = Receiver.start receiveConfig { Tag = "just-reject"; AckBehavior = Reject }
+    let _startReceiver3 = Receiver.start receiveConfig { Tag = "reject-requeue"; AckBehavior = RejectWithRequeue }
     
     wait ()
 

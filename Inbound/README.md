@@ -46,7 +46,21 @@ not enough! You need to "start" it by calling:
 channel.BasicConsume(config.QueueName, autoAck, consumerTag, consumer)
 ```
 
+## Acking
 
+After a message has been received, it should be acknowledged. If it goes without
+acknowledgement, it will be returned to the queue.
+
+This project shows three different ways to acknowledge a message:
+
+* A basic ack; this removes it from the queue
+* Basic rejection, with re-queuing; this returns it to the queue
+* Basic rejection
+
+### How to create an infinite loop
+
+Rejecting a message and requeuing it indefinitely is allowed, but probably a bad
+idea.
 
 ## Multiple receivers
 

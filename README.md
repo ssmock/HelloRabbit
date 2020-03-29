@@ -44,4 +44,3 @@ When a message is delivered to a consumer, Rabbit requires confirmation. This is
 - reject, no requeue - message received, but rejected; deadletter it (`reject_requeue_false`)
 
 When a message is requeued, its "redeliver" flag is set to true.
-
