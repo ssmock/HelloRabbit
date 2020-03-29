@@ -1,3 +1,6 @@
+Rather than installing RabbitMQ directly on this machine, we instead create a docker container
+for it.
+
 # run-one-off.sh
 
 From https://registry.hub.docker.com/_/rabbitmq/
@@ -61,7 +64,7 @@ to make it easier to connect to `some-rabbit`. Note that the IP address might ne
 ```
 
 ```
-/rabbitmqadmin -c rabbitmqadmin.conf publish exchange=amq.default routing_key=test payload="bad news"
+./rabbitmqadmin -c rabbitmqadmin.conf publish exchange=amq.default routing_key=test payload="bad news"
 ```
 
 ```
@@ -69,3 +72,7 @@ to make it easier to connect to `some-rabbit`. Note that the IP address might ne
 ```
 
 `ack_requeue_true` is the default. Other `ackmode`s: `ack_requeue_false`, `reject_requeue_true`, `reject_requeue_false`.
+
+```
+./rabbitmqadmin -c rabbitmqadmin.conf list consumers
+```

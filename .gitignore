@@ -4,6 +4,7 @@ project.lock.json
 .DS_Store
 *.pyc
 nupkg/
+packages/
 
 # Visual Studio Code
 .vscode
@@ -36,3 +37,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.fake
